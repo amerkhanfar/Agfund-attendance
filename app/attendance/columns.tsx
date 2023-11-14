@@ -91,6 +91,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     id: "actions",
+    header: "Action",
     cell: ({ row }) => {
       const payment = row.original.id;
       console.log(payment);
