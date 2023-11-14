@@ -9,7 +9,7 @@ async function getData(): Promise<Payment[]> {
       id: "728ed52f",
       seat: "D55",
       status: "Pending",
-      name: "mmmm",
+      name: "Amer Bassam Saeed Khanfar Saeed Khanfar",
     },
     {
       id: "728ed52f",
