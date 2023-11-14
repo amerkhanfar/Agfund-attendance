@@ -48,7 +48,7 @@ export default async function DemoPage() {
     <div className=' '>
       <div className='containers'>
         <img src='/Prize-logo.png' alt='prize logo' width={120} height={200} />
-        <h1>Attendance List</h1>
+        <h1 className='heading'>ATTENDANCE LIST</h1>
         <img src='/Agfund-logo.png' alt='prize logo' width={120} height={200} />
       </div>
       <DataTable columns={columns} data={data} />

@@ -87,3 +87,13 @@
 .bb {
   background-color: #8f1838;
 }
+
+.heading {
+  font-size: 15px;
+}
+
+@media only screen and (min-width: 550px) {
+  .heading {
+    font-size: 23px;
+  }
+}
