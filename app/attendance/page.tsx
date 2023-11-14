@@ -8,32 +8,32 @@ async function getData(): Promise<Payment[]> {
     {
       id: "728ed52f",
       seat: "D55",
-      status: "pending",
+      status: "Pending",
       name: "mmmm",
     },
     {
       id: "728ed52f",
       seat: "D55",
-      status: "pending",
+      status: "Pending",
       name: "mmmm",
     },
     {
       id: "728ed52f",
       seat: "D55",
-      status: "pending",
+      status: "Attended",
       name: "mmmm",
     },
     {
       id: "728ed52f",
       seat: "D55",
-      status: "pending",
+      status: "Pending",
       name: "amer",
     },
 
     {
       id: "728ed52f",
       seat: "D55",
-      status: "pending",
+      status: "Attended",
       name: "amer",
     },
 

@@ -86,6 +86,13 @@
 
 .bb {
   background-color: #8f1838;
+  margin-top: 100px;
+  padding: 10px 0px;
+}
+.ee {
+  background-color: #8f1838;
+
+  padding: 10px 0px;
 }
 
 .heading {

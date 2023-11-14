@@ -17,7 +17,7 @@ import {
 export type Payment = {
   id: string;
   seat: string;
-  status: "pending" | "processing" | "success" | "failed";
+  status: "Pending" | "Attended";
   name: string;
 };
 
@@ -42,7 +42,53 @@ export const columns: ColumnDef<Payment>[] = [
 
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Status
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      );
+    },
+
+    cell: ({ row }) => {
+      const payment = row.original.status;
+      console.log(payment);
+
+      return (
+        <div>
+          {payment == "Attended" ? (
+            <div
+              style={{
+                background: "#E1FCEF",
+                width: "80px",
+                display: "flex",
+                borderRadius: "7px",
+                padding: "5px 0px",
+                justifyContent: "center",
+                color: "#14804A",
+              }}>
+              Attended
+            </div>
+          ) : (
+            <div
+              style={{
+                background: "#E8E8E8",
+                width: "80px",
+                padding: "5px 0px",
+                display: "flex",
+                borderRadius: "7px",
+                justifyContent: "center",
+                color: "#757575",
+              }}>
+              Pending
+            </div>
+          )}
+        </div>
+      );
+    },
   },
   {
     id: "actions",
@@ -53,7 +99,7 @@ export const columns: ColumnDef<Payment>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='ghost' className='h-8 w-8 p-0'>
-              <span className='sr-only'>Open menu</span>
+              <span className='sr-only'>Open menu </span>
               <MoreHorizontal className='h-4 w-4' />
             </Button>
           </DropdownMenuTrigger>
