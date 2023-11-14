@@ -36,8 +36,6 @@ async function getData(): Promise<Payment[]> {
       status: "Attended",
       name: "amer",
     },
-
-    // ...
   ];
 }
 

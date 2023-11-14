@@ -15,7 +15,7 @@ import {
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Payment = {
-  id: string;
+  id: string | number;
   seat: string;
   status: "Pending" | "Attended";
   name: string;
@@ -55,7 +55,6 @@ export const columns: ColumnDef<Payment>[] = [
 
     cell: ({ row }) => {
       const payment = row.original.status;
-      console.log(payment);
 
       return (
         <div>
@@ -93,7 +92,8 @@ export const columns: ColumnDef<Payment>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const payment = row.original.id;
+      console.log(payment);
 
       return (
         <DropdownMenu>
