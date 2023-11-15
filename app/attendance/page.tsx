@@ -64,13 +64,22 @@ export default function DemoPage() {
   };
   useEffect(() => {
     getData();
+    const interval = setInterval(() => {
+      getData();
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
   return (
     <div className=' '>
       <div className='containers'>
         <img src='/Prize-logo.png' alt='prize logo' width={120} height={200} />
         <h1 className='heading'>ATTENDANCE LIST</h1>
-        <img src='/Agfund-logo.png' alt='prize logo' width={120} height={200} />
+        <img
+          src='/Agfund-logo-white.png'
+          alt='prize logo'
+          width={120}
+          height={200}
+        />
       </div>
       <DataTable columns={columns} data={data} />
     </div>
