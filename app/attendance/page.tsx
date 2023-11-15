@@ -64,10 +64,10 @@ export default function DemoPage() {
   };
   useEffect(() => {
     getData();
-    const interval = setInterval(() => {
-      getData();
-    }, 5000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => {
+    //   getData();
+    // }, 5000);
+    // return () => clearInterval(interval);
   }, []);
   return (
     <div className=' '>
@@ -75,7 +75,7 @@ export default function DemoPage() {
         <img src='/Prize-logo.png' alt='prize logo' width={120} height={200} />
         <h1 className='heading'>ATTENDANCE LIST</h1>
         <img
-          src='/Agfund-logo-white.png'
+          src='/Agfund-Logo-white.png'
           alt='prize logo'
           width={120}
           height={200}

@@ -112,7 +112,7 @@ export const columns: ColumnDef<Payment>[] = [
                   }}
                   variant='ghost'
                   className='h-8 w-8 p-0'>
-                  Select ↓
+                  -
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align='end'>
