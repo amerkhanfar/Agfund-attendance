@@ -1,5 +1,5 @@
 "use client";
-
+import { prisma } from "../db";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,13 +11,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import updateData, { updatePending } from "./update";
+import { useRouter } from "next/navigation";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Payment = {
-  id: string | number;
+  id: string;
   seat: string;
-  status: "Pending" | "Attended";
+  status: string;
   name: string;
 };
 
@@ -93,8 +95,11 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     header: "Action",
     cell: ({ row }) => {
-      const payment = row.original.id;
-      console.log(payment);
+      const attend = row.original.id;
+      const router = useRouter();
+      const handleRefresh = () => {
+        location.reload();
+      };
 
       return (
         <DropdownMenu>
@@ -106,10 +111,18 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Status</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log("done")}>
+            <DropdownMenuItem
+              onClick={async () => {
+                await updateData(attend);
+                location.reload();
+              }}>
               Attended
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log("done")}>
+            <DropdownMenuItem
+              onClick={async () => {
+                await updatePending(attend);
+                location.reload();
+              }}>
               Pending
             </DropdownMenuItem>
             <DropdownMenuSeparator />

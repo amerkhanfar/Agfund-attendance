@@ -1,6 +1,11 @@
 import { Payment, columns } from "./columns";
 import { DataTable } from "./data-table";
+import { prisma } from "../db";
 import "../globals.css";
+
+async function getAttendee() {
+  return prisma.attendee.findMany();
+}
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
@@ -40,8 +45,7 @@ async function getData(): Promise<Payment[]> {
 }
 
 export default async function DemoPage() {
-  const data = await getData();
-
+  const data = await getAttendee();
   return (
     <div className=' '>
       <div className='containers'>
