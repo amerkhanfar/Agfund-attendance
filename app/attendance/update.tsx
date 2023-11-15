@@ -1,30 +1,35 @@
 "use server";
-import { prisma } from "../db";
+import axios from "axios";
 
-const updateData = async (id: string) => {
+const updateData = async (data: any) => {
+  console.log(data);
   try {
-    await prisma.attendee.update({
-      where: {
-        id: id,
-      },
-      data: {
+    await axios.put(
+      `https://sdg-signture-default-rtdb.firebaseio.com/attendance/-${data.id}.json`,
+      {
+        seat: data.seat,
+        name: data.name,
         status: "Attended",
       },
-    });
-  } catch (error) {}
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const updatePending = async (id: string) => {
+export const updatePending = async (data: any) => {
   try {
-    await prisma.attendee.update({
-      where: {
-        id: id,
-      },
-      data: {
+    await axios.put(
+      `https://sdg-signture-default-rtdb.firebaseio.com/attendance/-${data.id}.json`,
+      {
+        seat: data.seat,
+        name: data.name,
         status: "Pending",
       },
-    });
-  } catch (error) {}
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default updateData;

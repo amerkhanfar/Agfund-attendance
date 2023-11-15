@@ -1,11 +1,9 @@
+"use client";
 import { Payment, columns } from "./columns";
 import { DataTable } from "./data-table";
-import { prisma } from "../db";
 import "../globals.css";
-
-async function getAttendee() {
-  return prisma.attendee.findMany();
-}
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
@@ -44,8 +42,29 @@ async function getData(): Promise<Payment[]> {
   ];
 }
 
-export default async function DemoPage() {
-  const data = await getAttendee();
+export default function DemoPage() {
+  const [data, setData] = useState<any>([]);
+  const getData = async () => {
+    try {
+      const attendance = await axios.get(
+        "https://sdg-signture-default-rtdb.firebaseio.com/attendance.json",
+      );
+      const attendanceData = attendance.data;
+      const transformedData = Object.keys(attendanceData).map((key) => {
+        const item = attendanceData[key];
+        return {
+          id: key.slice(1), // Assuming you want to remove the '-' from the id
+          seat: item.seat,
+          status: item.status === "Pending" ? "Pending" : "Attended",
+          name: item.name,
+        };
+      });
+      setData(transformedData);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className=' '>
       <div className='containers'>

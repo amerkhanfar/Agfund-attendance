@@ -1,5 +1,4 @@
 "use client";
-import { prisma } from "../db";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -113,14 +112,14 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuLabel>Status</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={async () => {
-                await updateData(attend);
+                await updateData(row.original);
                 location.reload();
               }}>
               Attended
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={async () => {
-                await updatePending(attend);
+                await updatePending(row.original);
                 location.reload();
               }}>
               Pending

@@ -1,7 +1,9 @@
+"use client";
 import react, { useState } from "react";
-import { prisma } from "../db";
+
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Page() {
   //   const [name, setName] = useState("");
@@ -9,8 +11,6 @@ export default function Page() {
   //   const [status, setStatus] = useState("");
 
   async function createTodo(data: FormData) {
-    "use server";
-
     const name = data.get("name")?.valueOf();
     if (typeof name !== "string" || name.length === 0) {
       throw new Error("Invalid Title");
@@ -26,7 +26,10 @@ export default function Page() {
       throw new Error("Invalid Title");
     }
 
-    await prisma.attendee.create({ data: { name, seat, status } });
+    await axios.post(
+      "https://sdg-signture-default-rtdb.firebaseio.com/attendance.json",
+      { name, seat, status },
+    );
     redirect("/attendance");
   }
   return (
