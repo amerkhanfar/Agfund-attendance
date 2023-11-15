@@ -55,7 +55,7 @@ export default function DemoPage() {
         return {
           id: key.slice(1), // Assuming you want to remove the '-' from the id
           seat: item.seat,
-          status: item.status === "Pending" ? "Pending" : "Attended",
+          status: item.status,
           name: item.name,
         };
       });

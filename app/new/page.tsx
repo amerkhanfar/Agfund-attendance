@@ -62,6 +62,7 @@ export default function Page() {
           type='text'
           name='status'
           placeholder='status'
+          value={"away"}
           //   value={status}
           //   onChange={(e) => {
           //     setStatus(e.target.value);

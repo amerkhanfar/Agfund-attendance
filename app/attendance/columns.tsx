@@ -1,4 +1,5 @@
 "use client";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -56,77 +57,122 @@ export const columns: ColumnDef<Payment>[] = [
 
     cell: ({ row }) => {
       const payment = row.original.status;
-
       return (
         <div>
           {payment == "Attended" ? (
-            <div
-              style={{
-                background: "#E1FCEF",
-                width: "80px",
-                display: "flex",
-                borderRadius: "7px",
-                padding: "5px 0px",
-                justifyContent: "center",
-                color: "#14804A",
-              }}>
-              Attended
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  style={{
+                    background: "#E1FCEF",
+                    width: "80px",
+                    display: "flex",
+                    borderRadius: "7px",
+                    padding: "5px 0px",
+                    justifyContent: "center",
+                    color: "#14804A",
+                  }}
+                  variant='ghost'
+                  className='h-8 w-8 p-0'>
+                  Arrived
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end'>
+                <DropdownMenuLabel>Status</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await updateData(row.original);
+                    location.reload();
+                  }}>
+                  Attended
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await updatePending(row.original);
+                    location.reload();
+                  }}>
+                  Absent
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : payment === "away" ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  style={{
+                    background: "#E8E8E8",
+
+                    width: "80px",
+                    display: "flex",
+                    borderRadius: "7px",
+                    padding: "5px 0px",
+                    justifyContent: "center",
+                    color: "#757575",
+                  }}
+                  variant='ghost'
+                  className='h-8 w-8 p-0'>
+                  Select ↓
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end'>
+                <DropdownMenuLabel>Status</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await updateData(row.original);
+                    location.reload();
+                  }}>
+                  Arrived
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await updatePending(row.original);
+                    location.reload();
+                  }}>
+                  Absent
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
-            <div
-              style={{
-                background: "#E8E8E8",
-                width: "80px",
-                padding: "5px 0px",
-                display: "flex",
-                borderRadius: "7px",
-                justifyContent: "center",
-                color: "#757575",
-              }}>
-              Pending
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  style={{
+                    background: "#c60e0e",
+                    width: "80px",
+                    display: "flex",
+                    borderRadius: "7px",
+                    padding: "5px 0px",
+                    justifyContent: "center",
+                    color: "white",
+                  }}
+                  variant='ghost'
+                  className='h-8 w-8 p-0'>
+                  Absent
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end'>
+                <DropdownMenuLabel>Status</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await updateData(row.original);
+                    location.reload();
+                  }}>
+                  Arrived
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await updatePending(row.original);
+                    location.reload();
+                  }}>
+                  Absent
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </div>
-      );
-    },
-  },
-  {
-    id: "actions",
-    header: "Action",
-    cell: ({ row }) => {
-      const attend = row.original.id;
-      const router = useRouter();
-      const handleRefresh = () => {
-        location.reload();
-      };
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='ghost' className='h-8 w-8 p-0'>
-              <span className='sr-only'>Open menu </span>
-              <MoreHorizontal className='h-4 w-4' />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Status</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={async () => {
-                await updateData(row.original);
-                location.reload();
-              }}>
-              Attended
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={async () => {
-                await updatePending(row.original);
-                location.reload();
-              }}>
-              Pending
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-          </DropdownMenuContent>
-        </DropdownMenu>
       );
     },
   },
