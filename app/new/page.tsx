@@ -30,7 +30,6 @@ export default function Page() {
       "https://sdg-signture-default-rtdb.firebaseio.com/attendance.json",
       { name, seat, status },
     );
-    redirect("/attendance");
   }
   return (
     <>
