@@ -84,7 +84,7 @@ export const columns: ColumnDef<Payment>[] = [
                     await updateData(row.original);
                     location.reload();
                   }}>
-                  Attended
+                  Arrived
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={async () => {
