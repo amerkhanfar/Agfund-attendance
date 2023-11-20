@@ -52,11 +52,12 @@ export default function DemoPage() {
       const attendanceData = attendance.data;
       const transformedData = Object.keys(attendanceData).map((key) => {
         const item = attendanceData[key];
+
         return {
           id: key.slice(1), // Assuming you want to remove the '-' from the id
           seat: item.seat,
           status: item.status,
-          name: item.name,
+          name: item.name.charAt(0).toUpperCase() + item.name.slice(1),
         };
       });
       setData(transformedData);
